@@ -1,0 +1,33 @@
+class Solution:
+    def minCostConnectPoints(self, p: List[List[int]]) -> int:
+        n=len(p)
+        adj=[[] for _ in range(n)]
+
+        for i in range(n):
+            for j in range(i+1,n):
+                dist=abs(p[i][0]-p[j][0])+abs(p[i][1]-p[j][1])
+                adj[i].append((j, dist))
+                adj[j].append((i, dist))
+
+
+        q=[]
+        heapq.heappush(q,(0,0))
+        s=0
+        vis=[False]*n
+        while q:
+            wt,node=heapq.heappop(q)
+            if vis[node]==True:
+                continue
+            vis[node]=True
+            s+=wt
+            
+
+            for v in adj[node]:
+                
+                wt=v[1]
+                nod=v[0]
+                if  vis[nod]==False:
+                    heapq.heappush(q,(wt,nod))
+        return s
+
+
