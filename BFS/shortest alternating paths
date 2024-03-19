@@ -1,0 +1,33 @@
+class Solution:
+    def shortestAlternatingPaths(self, n: int, red: List[List[int]], blue: List[List[int]]) -> List[int]:
+        adj=defaultdict(list)
+        for u,v in red:
+            adj[u].append((v,1))
+        for u,v in blue:
+            adj[u].append((v,0))
+        print(adj)
+
+        ans=[-1]*n
+        vis=set()
+        q=deque([])
+        q.append((0,0,-1))
+        ans[0]=0
+        vis.add((0,0))
+        vis.add((0,1))
+        while q:
+            curr=q.popleft()
+            node=curr[0]
+            step=curr[1]
+            color=curr[-1]
+            for neb in adj[node]:
+                child=neb[0]
+                currcolor=neb[-1]
+                if (child,currcolor) not in vis and color!=currcolor:
+                    q.append((child,step+1,currcolor))
+                    vis.add((child,currcolor))
+
+                    if ans[child]==-1:
+                        ans[child]=step+1
+        return ans
+        
+        
