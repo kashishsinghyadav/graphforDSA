@@ -1,7 +1,7 @@
 class Solution:
     def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
         def check(i, j):
-            if i < 0 or i >= m or j < 0 or j >= n:
+            if i < 0 or i >= m or j < 0 or j >= n: 
                 return True
             if grid2[i][j] != 1:
                 return True
